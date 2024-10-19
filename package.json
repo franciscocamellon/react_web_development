@@ -15,7 +15,10 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/react-router-dom": "^5.3.3",
+<<<<<<< HEAD
     "dayjs": "^1.11.13",
+=======
+>>>>>>> 39ea40e (wpi: Typescript structure)
     "dexie": "^4.0.8",
     "dexie-react-hooks": "^1.1.7",
     "i18next": "^23.16.5",
