@@ -2,10 +2,9 @@ import { Button, ButtonProps } from "@mui/material";
 
 interface IButtonProps extends ButtonProps {
   children?: React.ReactNode;
-  props: any;
   variant?: "text" | "contained" | "outlined";
   size?: "small" | "medium" | "large";
-  className?: "";
+  className?: string;
 }
 
 const ButtonComponent: React.FC<IButtonProps> = ({ children, ...props }) => {

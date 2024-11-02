@@ -1,11 +1,12 @@
-import { Snackbar, SnackbarProps } from '@mui/material';
+import { Snackbar, SnackbarProps } from "@mui/material";
 
-interface ISnackbarProps extends SnackbarProps{
-  props: any;
+interface ISnackbarProps extends SnackbarProps {
+  autoHideDuration: number;
+  message: string;
 }
 
-const SnackbarComponent: React.FC<ISnackbarProps> = ({children, ...props}) => {
-    return <Snackbar {...props}>{children}</Snackbar>
-}
+const SnackbarComponent: React.FC<ISnackbarProps> = ({ children, ...props }) => {
+  return <Snackbar {...props}>{children}</Snackbar>;
+};
 
 export default SnackbarComponent;
