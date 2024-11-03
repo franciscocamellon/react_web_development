@@ -8,7 +8,7 @@ interface IButtonProps extends ButtonProps {
 }
 
 const ButtonComponent: React.FC<IButtonProps> = ({ children, ...props }) => {
-  const { variant = "outlined", size = "large" } = props;
+  const { variant = "contained", size = "large" } = props;
 
   return (
     <Button
