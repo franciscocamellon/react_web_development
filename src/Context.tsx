@@ -1,5 +1,6 @@
 import React, { createContext, ReactNode, useContext, useState } from "react";
 import { Alert, Grid, Snackbar } from "./components";
+import { createClient } from "@supabase/supabase-js";
 
 interface AppProviderProps {
   children: ReactNode;
@@ -9,9 +10,12 @@ interface AppContextInterface {
   changeLanguage: void;
   showSnackMessage: (message: string) => void;
   showAlertMessage: (message: string, severity: string) => void;
+  supabase: {};
 }
 
 const AppContext = createContext<AppContextInterface | null>(null);
+
+const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_ANON_KEY);
 
 const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const timeoutDuration = 6000;
@@ -48,30 +52,34 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     changeLanguage,
     showSnackMessage,
     showAlertMessage,
+    supabase,
   };
+
   return (
-    <AppContext.Provider value={sharedState}>
-      {children}
+    <div className="app-background">
+      <AppContext.Provider value={sharedState}>
+        {children}
 
-      <Snackbar autoHideDuration={timeoutDuration} onClose={handleClose} open={snackOpen} message={snackMessage} />
+        <Snackbar autoHideDuration={timeoutDuration} onClose={handleClose} open={snackOpen} message={snackMessage} />
 
-      {alertMessage ? (
-        <Grid
-          container={true}
-          sx={{
-            position: "absolute",
-            left: 0,
-            bottom: 0,
-            width: "100%",
-            padding: 2,
-          }}
-        >
-          <Grid item={true} size={{ xs: 12 }}>
-            <Alert severity={alertSeverity}>{alertMessage}</Alert>
+        {alertMessage ? (
+          <Grid
+            container={true}
+            sx={{
+              position: "absolute",
+              left: 0,
+              bottom: 0,
+              width: "100%",
+              padding: 2,
+            }}
+          >
+            <Grid item={true} size={{ xs: 12 }}>
+              <Alert severity={alertSeverity}>{alertMessage}</Alert>
+            </Grid>
           </Grid>
-        </Grid>
-      ) : null}
-    </AppContext.Provider>
+        ) : null}
+      </AppContext.Provider>
+    </div>
   );
 };
 
