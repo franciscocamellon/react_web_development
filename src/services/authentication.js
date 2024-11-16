@@ -21,4 +21,11 @@ const signIn = async (email, password, supabase) => {
   });
 };
 
-export { isAuthenticated, handleVerificationProtected, signIn };
+const signUp = async (email, password, supabase) => {
+  return await supabase.auth.signUp({
+    email,
+    password,
+  });
+};
+
+export { isAuthenticated, handleVerificationProtected, signIn, signUp };
