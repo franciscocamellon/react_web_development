@@ -1,5 +1,6 @@
-import React, { createContext, ReactNode, useContext, useState } from "react";
+import React, { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { Alert, Grid, Snackbar } from "./components";
+import { useTranslation } from "react-i18next";
 
 interface AppProviderProps {
   children: ReactNode;
@@ -9,11 +10,13 @@ interface AppContextInterface {
   changeLanguage: void;
   showSnackMessage: (message: string) => void;
   showAlertMessage: (message: string, severity: string) => void;
+  translate: string;
 }
 
 const AppContext = createContext<AppContextInterface | null>(null);
 
 const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
+  const { t: translate, i18n } = useTranslation();
   const timeoutDuration = 6000;
 
   const [snackOpen, setSnackOpen] = useState(false);
@@ -21,8 +24,10 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const [alertSeverity, setAlertSeverity] = useState("info");
   const [alertMessage, setAlertMessage] = useState("");
 
-  const changeLanguage = () => {
-    console.log("Estou escolhendo uma linguagem");
+  const changeLanguage = (lang) => {
+    console.log(lang);
+    i18n.changeLanguage(lang);
+    localStorage.setItem("language", lang);
   };
 
   const showSnackMessage = (message: string) => {
@@ -48,7 +53,20 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     changeLanguage,
     showSnackMessage,
     showAlertMessage,
+    translate,
   };
+
+  useEffect(() => {
+    const storedLanguage = localStorage.getItem("language");
+
+    if (storedLanguage) {
+      changeLanguage(storedLanguage);
+    } else {
+      const navLang = navigator.language.split("-")[0];
+      changeLanguage(navLang);
+    }
+  }, []);
+
   return (
     <AppContext.Provider value={sharedState}>
       {children}
