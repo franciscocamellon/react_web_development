@@ -8,7 +8,7 @@ import { handleOnChange } from "../utils/core";
 
 const SignIn: React.FC = () => {
   const navigate = useNavigate();
-  const { showSnackMessage, showAlertMessage, supabase, translate, changeLanguage } = useAppContext();
+  const { showSnackMessage, showAlertMessage, supabase } = useAppContext();
   const [data, setData] = useState({
     email: {
       value: "",
