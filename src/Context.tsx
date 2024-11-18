@@ -1,10 +1,7 @@
 import React, { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { Alert, Grid, Snackbar } from "./components";
 import { useTranslation } from "react-i18next";
-<<<<<<< HEAD
 import { createClient } from "@supabase/supabase-js";
-=======
->>>>>>> b2fb4ce (chore: Tradução finalizada (#5))
 
 interface AppProviderProps {
   children: ReactNode;
@@ -15,10 +12,7 @@ interface AppContextInterface {
   showSnackMessage: (message: string) => void;
   showAlertMessage: (message: string, severity: string) => void;
   translate: string;
-<<<<<<< HEAD
   supabase: {};
-=======
->>>>>>> b2fb4ce (chore: Tradução finalizada (#5))
 }
 
 const AppContext = createContext<AppContextInterface | null>(null);
