@@ -4,8 +4,10 @@ import CribIcon from "@mui/icons-material/Crib";
 import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
 import SpaIcon from "@mui/icons-material/Spa";
 import { useAppContext } from "../../Context";
+import { useNavigate } from "react-router-dom";
 
 const CustomList = ({ items, ...props }) => {
+  const navigate = useNavigate();
   const { translate } = useAppContext();
   const theme = useTheme();
 
@@ -70,8 +72,13 @@ const CustomList = ({ items, ...props }) => {
       }}
     >
       {items.map((item, idx) => {
+        const typeStr = typeString[item.action_type];
         return (
-          <ListItem sx={{ backgroundColor: theme.palette.common.white, borderRadius: "60px", marginTop: "1em" }}>
+          <ListItem
+            sx={{ backgroundColor: theme.palette.common.white, borderRadius: "60px", marginTop: "1em" }}
+            id={`new-item-list-${idx}`}
+            onClick={() => navigate(`/${item.action_type}/${item.id}`)}
+          >
             <ListItemAvatar>
               <Avatar
                 sx={{

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, Avatar, Box, Typography, CardNewItem, CustomList } from "../components";
 import SignalCellularAltIcon from "@mui/icons-material/SignalCellularAlt";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -7,10 +7,25 @@ import { useTheme } from "@mui/material/styles";
 import baby from "../assets/img/baby.png";
 import { useNavigate } from "react-router-dom";
 import { ACTIONS } from "../constants/actions";
+import { list } from "../services/database";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
   const theme = useTheme();
+
+  const [data, setData] = useState([]);
+
+  const loadData = () => {
+    const d = list();
+
+    if (d) {
+      setData(d);
+    }
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
 
   const items = [
     { action_type: 1 },
@@ -100,7 +115,7 @@ const Home: React.FC = () => {
         }}
       >
         <Grid item={true} size={{ xs: 12 }} sx={{ height: "58vh", marginTop: "150px", overflow: "auto" }}>
-          <CustomList items={items} />
+          <CustomList items={data} />
         </Grid>
       </Grid>
     </>
