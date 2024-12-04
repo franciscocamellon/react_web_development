@@ -3,6 +3,15 @@ import { Alert, Grid, Snackbar } from "./components";
 import { useTranslation } from "react-i18next";
 import { createClient } from "@supabase/supabase-js";
 
+import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.extend(duration);
+
 interface AppProviderProps {
   children: ReactNode;
 }

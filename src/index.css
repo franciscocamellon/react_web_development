@@ -12,6 +12,8 @@ code {
 
 .app-background {
   background-color: #f7f7f7;
+  height: 100vh;
+  float: left;
 }
 
 .general-textfield > div,
