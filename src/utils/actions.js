@@ -23,9 +23,15 @@ const getTitle = (action_type) => {
   }
 };
 
-const validateDiaper = (data) => {};
-const validateSleep = (data) => {};
-const validateEat = (data) => {};
+const validateDiaper = (data) => {
+  return [];
+};
+const validateSleep = (data) => {
+  return [];
+};
+const validateEat = (data) => {
+  return [];
+};
 
 const validateFields = (data, actionType) => {
   switch (actionType) {
